@@ -1,5 +1,6 @@
 package dat3.cars.configuration;
 
+import dat3.cars.entity.Car;
 import dat3.cars.entity.Member;
 import dat3.cars.repository.CarRepository;
 import dat3.cars.repository.MemberRepository;
@@ -29,8 +30,14 @@ public class SetupDevUsers implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        Member m1 = new Member("userxx",passwordUsedByAll,"a@b.dk","Abdullah","Abdi","Guldbergsgade 29N","København",2200,"Yes","22");
-        memberRepository.save(m1);
+        Member member1 = new Member("user1",passwordUsedByAll,"user1@kea.dk","Kasper","Hansen","Guldbergsgade","Kobenhavn",2200,"Yes","8,5/10");
+        Member member2 = new Member("user2",passwordUsedByAll,"user2@kea.dk","Jakob","Petersen","Meuninegade","Kobenhavn",2200,"Yes","9,5/10");
+        memberRepository.save(member1);
+        memberRepository.save(member2);
+        Car car1 = new Car("bmw","x5",10,5);
+        Car car2 = new Car("opel","corsa",5,2.5);
+        carRepository.save(car1);
+        carRepository.save(car2);
 
         setupUserWithRoleUsers();
     }
