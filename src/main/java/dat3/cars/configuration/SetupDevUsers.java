@@ -11,6 +11,10 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 import dat3.security.repository.UserWithRolesRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Controller
 public class SetupDevUsers implements ApplicationRunner {
 
@@ -32,13 +36,17 @@ public class SetupDevUsers implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         Member member1 = new Member("user4",passwordUsedByAll,"user1@kea.dk","Kasper","Hansen","Guldbergsgade","Kobenhavn",2200,"Yes","8,5/10");
         Member member2 = new Member("user5",passwordUsedByAll,"user2@kea.dk","Jakob","Petersen","Meuninegade","Kobenhavn",2200,"Yes","9,5/10");
-        memberRepository.save(member1);
-        memberRepository.save(member2);
+        List<Member> membersList = new ArrayList<>();
+        membersList.add(member1);
+        membersList.add(member2);
+        memberRepository.saveAll(membersList);
         Car car1 = new Car("bmw","x5",10,5);
         Car car2 = new Car("opel","corsa",5,2.5);
+        List<Car> carList = new ArrayList<>();
+        carList.add(car1);
+        carList.add(car2);
+        carRepository.saveAll(carList);
         setupUserWithRoleUsers();
-        carRepository.save(car1);
-        carRepository.save(car2);
 
     }
 
