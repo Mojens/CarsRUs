@@ -38,4 +38,15 @@ public class Car {
     this.bestDiscount = bestDiscount;
   }
 
+  @Override
+  public String toString() {
+    return "Car{" +
+        "brand='" + brand + '\'' +
+        ", model='" + model + '\'' +
+        ", pricePrDay=" + pricePrDay +
+        ", bestDiscount=" + bestDiscount +
+        ", created=" + created +
+        ", edited=" + edited +
+        '}';
+  }
 }

@@ -41,4 +41,17 @@ public class Member extends UserWithRoles {
     this.approved = approved;
     this.ranking = ranking;
   }
+
+  @Override
+  public String toString() {
+    return "Member{" +
+        "firstName='" + firstName + '\'' +
+        ", lastName='" + lastName + '\'' +
+        ", street='" + street + '\'' +
+        ", city='" + city + '\'' +
+        ", zip=" + zip +
+        ", approved='" + approved + '\'' +
+        ", ranking='" + ranking + '\'' +
+        '}';
+  }
 }
