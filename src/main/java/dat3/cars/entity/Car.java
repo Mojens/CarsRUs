@@ -37,4 +37,5 @@ public class Car {
     this.pricePrDay = pricePrDay;
     this.bestDiscount = bestDiscount;
   }
+
 }
