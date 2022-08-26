@@ -1,4 +1,4 @@
-# startcode-with-security
+# Cars 'R' Us
 
 Clone (prefered) or fork the project
 If cloned delete the hidden .git folder and do a new git init
