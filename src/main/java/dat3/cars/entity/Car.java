@@ -2,9 +2,11 @@ package dat3.cars.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.bytebuddy.asm.Advice;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -16,6 +18,9 @@ public class Car {
   private String model;
   private double pricePrDay;
   private double bestDiscount;
+
+  private LocalDateTime created;
+  private LocalDateTime edited;
 
   public Car() {
   }

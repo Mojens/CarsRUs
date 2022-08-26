@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -25,6 +26,7 @@ public class Member extends UserWithRoles {
   private String approved;
 
   private String ranking;
+
   public Member() {}
 
   public Member(String user, String password, String email, String firstName, String lastName, String street, String city, int zip, String approved, String ranking) {

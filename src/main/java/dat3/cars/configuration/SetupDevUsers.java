@@ -1,6 +1,7 @@
 package dat3.cars.configuration;
 
 import dat3.cars.entity.Member;
+import dat3.cars.repository.CarRepository;
 import dat3.cars.repository.MemberRepository;
 import dat3.security.entity.Role;
 import dat3.security.entity.UserWithRoles;
@@ -15,11 +16,14 @@ public class SetupDevUsers implements ApplicationRunner {
     UserWithRolesRepository userWithRolesRepository;
     String passwordUsedByAll;
     MemberRepository memberRepository;
+    CarRepository carRepository;
 
     public SetupDevUsers(UserWithRolesRepository userWithRolesRepository,
-                         MemberRepository memberRepository) {
+                         MemberRepository memberRepository,
+                         CarRepository carRepository) {
         this.userWithRolesRepository = userWithRolesRepository;
         this.memberRepository = memberRepository;
+        this.carRepository = carRepository;
         passwordUsedByAll = "test12";
     }
 
