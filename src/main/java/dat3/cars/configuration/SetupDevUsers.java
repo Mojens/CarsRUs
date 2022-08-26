@@ -30,16 +30,16 @@ public class SetupDevUsers implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        Member member1 = new Member("user1",passwordUsedByAll,"user1@kea.dk","Kasper","Hansen","Guldbergsgade","Kobenhavn",2200,"Yes","8,5/10");
-        Member member2 = new Member("user2",passwordUsedByAll,"user2@kea.dk","Jakob","Petersen","Meuninegade","Kobenhavn",2200,"Yes","9,5/10");
+        Member member1 = new Member("user4",passwordUsedByAll,"user1@kea.dk","Kasper","Hansen","Guldbergsgade","Kobenhavn",2200,"Yes","8,5/10");
+        Member member2 = new Member("user5",passwordUsedByAll,"user2@kea.dk","Jakob","Petersen","Meuninegade","Kobenhavn",2200,"Yes","9,5/10");
         memberRepository.save(member1);
         memberRepository.save(member2);
         Car car1 = new Car("bmw","x5",10,5);
         Car car2 = new Car("opel","corsa",5,2.5);
+        setupUserWithRoleUsers();
         carRepository.save(car1);
         carRepository.save(car2);
 
-        setupUserWithRoleUsers();
     }
 
     /*****************************************************************************************
