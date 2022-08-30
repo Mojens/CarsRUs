@@ -29,16 +29,4 @@ class MemberRepositoryTest {
     memberRepository.save(m2);
     member2Id = m2.getUsername();
   }
-
-  @Test
-  public void testFindByID(){
-    Member foundMember = memberRepository.findById("member1").get();
-    assertEquals("member1",foundMember.getUsername());
-  }
-
-  @Test
-  public void testCityExist(){
-    boolean doesTheCityExist = memberRepository.existsByCity("Kobenhavn");
-    assertTrue(doesTheCityExist);
-  }
 }

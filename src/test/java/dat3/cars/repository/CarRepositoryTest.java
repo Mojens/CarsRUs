@@ -38,17 +38,6 @@ class CarRepositoryTest {
     car2Model = car2.getModel();
   }
 
-  @Test
-  public void testFindByID(){
-    Car foundCar = carRepository.findById(car1Model).get();
-    assertEquals("x5",foundCar.getModel());
-  }
-
-  @Test
-  public void testModelExist(){
-    boolean isItThere = carRepository.existsById("x5");
-    assertTrue(isItThere);
-  }
 
 
 }
