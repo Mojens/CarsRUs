@@ -19,8 +19,18 @@ class CarRepositoryTest {
 
   @BeforeAll
   public static void setUpData(@Autowired CarRepository carRepository){
-    Car car1 = new Car("bmw","x5",10,5);
-    Car car2 = new Car("opel","corsa",5,2.5);
+    Car car1 = Car.builder()
+        .brand("Volvo")
+        .model("V70")
+        .pricePrDay(700)
+        .bestDiscount(30.0)
+        .build();
+    Car car2 = Car.builder()
+        .brand("BMW")
+        .model("x5")
+        .pricePrDay(700)
+        .bestDiscount(30.0)
+        .build();
 
     carRepository.save(car1);
     car1Model = car1.getModel();

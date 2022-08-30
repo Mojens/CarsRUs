@@ -21,20 +21,19 @@ class MemberRepositoryTest {
   @BeforeAll
   public static void setUpData(@Autowired MemberRepository memberRepository){
     passwordUsedByAll = "test12";
+    Member m1 = new Member("member1", passwordUsedByAll, "memb1@a.dk", "Kurt", "Wonnegut", "Lyngbyvej 2", "Lynbby", "2800");
+    Member m2 = new Member("member2", passwordUsedByAll, "memb1@a.d", "Kut", "Wonnegt", "Lygbyvej 2", "Lybby", "200");
 
-    Member member1 = new Member("user1",passwordUsedByAll,"user1@kea.dk","Kasper","Hansen","Guldbergsgade","Kobenhavn",2200,"Yes","8,5/10");
-    Member member2 = new Member("user2",passwordUsedByAll,"user2@kea.dk","Jakob","Petersen","Meuninegade","Kobenhavn",2200,"Yes","9,5/10");
-
-    memberRepository.save(member1);
-    member1Id = member1.getUsername();
-    memberRepository.save(member2);
-    member2Id = member2.getUsername();
+    memberRepository.save(m1);
+    member1Id = m1.getUsername();
+    memberRepository.save(m2);
+    member2Id = m2.getUsername();
   }
 
   @Test
   public void testFindByID(){
-    Member foundMember = memberRepository.findById("user1").get();
-    assertEquals("user1",foundMember.getUsername());
+    Member foundMember = memberRepository.findById("member1").get();
+    assertEquals("member1",foundMember.getUsername());
   }
 
   @Test

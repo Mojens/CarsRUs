@@ -1,57 +1,48 @@
 package dat3.cars.entity;
 
+
 import dat3.security.entity.UserWithRoles;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.time.LocalDateTime;
 
-@Entity
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
 public class Member extends UserWithRoles {
 
+  // Id is username from UserWithRoles
+
+  //Make sure you understand why we CANNOT make any of the fields private using the inheritance strategy we are
+  @Column(length = 30) //I Wish could be made NOT NULL
   private String firstName;
 
-  private String lastName;
+  @Column(length = 50)
+  private String lastName; //I Wish could be made NOT NULL
 
+  @Column(length = 50)  //I Wish could be made NOT NULL
   private String street;
 
+  @Column(length = 50) //I Wish could be made NOT NULL
   private String city;
 
-  private int zip;
+  @Column(length = 50) //I Wish could be made NOT NULL
+  private String zip;
 
-  private String approved;
+  private boolean approved;
+  private int ranking;
 
-  private String ranking;
-
-  //Der skal laves ikke en created og update date, da den arver
-
-  public Member() {}
-
-  public Member(String user, String password, String email, String firstName, String lastName, String street, String city, int zip, String approved, String ranking) {
+  public Member(String user, String password, String email, String firstName, String lastName, String street, String city, String zip) {
     super(user, password, email);
     this.firstName = firstName;
     this.lastName = lastName;
     this.street = street;
     this.city = city;
     this.zip = zip;
-    this.approved = approved;
-    this.ranking = ranking;
-  }
-
-  @Override
-  public String toString() {
-    return "Member{" +
-        "firstName='" + firstName + '\'' +
-        ", lastName='" + lastName + '\'' +
-        ", street='" + street + '\'' +
-        ", city='" + city + '\'' +
-        ", zip=" + zip +
-        ", approved='" + approved + '\'' +
-        ", ranking='" + ranking + '\'' +
-        '}';
   }
 }

@@ -34,19 +34,16 @@ public class SetupDevUsers implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        Member member1 = new Member("user4",passwordUsedByAll,"user1@kea.dk","Kasper","Hansen","Guldbergsgade","Kobenhavn",2200,"Yes","8,5/10");
-        Member member2 = new Member("user5",passwordUsedByAll,"user2@kea.dk","Jakob","Petersen","Meuninegade","Kobenhavn",2200,"Yes","9,5/10");
-        List<Member> membersList = new ArrayList<>();
-        membersList.add(member1);
-        membersList.add(member2);
-        memberRepository.saveAll(membersList);
-        Car car1 = new Car("bmw","x5",10,5);
-        Car car2 = new Car("opel","corsa",5,2.5);
-        List<Car> carList = new ArrayList<>();
-        carList.add(car1);
-        carList.add(car2);
-        carRepository.saveAll(carList);
-        setupUserWithRoleUsers();
+        Member m1 = new Member("member1", passwordUsedByAll, "memb1@a.dk", "Kurt", "Wonnegut", "Lyngbyvej 2", "Lynbby", "2800");
+        memberRepository.save(m1);
+        Car car1 = Car.builder()
+            .brand("Volvo")
+            .model("V70")
+            .pricePrDay(700)
+            .bestDiscount(30.0)
+            .build();
+
+        carRepository.save(car1);
 
     }
 

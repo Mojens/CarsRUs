@@ -1,52 +1,41 @@
 package dat3.cars.entity;
 
-import dat3.security.entity.UserWithRoles;
-import lombok.Getter;
-import lombok.Setter;
-import net.bytebuddy.asm.Advice;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
 @Getter
 @Setter
-public class Car {
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
+@EqualsAndHashCode  // When performance becomes important, never set like this
 
-  private String brand;
+@Entity
+public class Car {
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  int id;
+
+  @Column(length = 50,nullable = false)
+  private String brand;
+
+  @Column(length= 50, nullable = false)
   private String model;
-  private double pricePrDay;
-  private double bestDiscount;
+
+  double pricePrDay;
+
+  //Best discount price (percent for pricePrDay) an admin can offer
+  double bestDiscount;
 
   @CreationTimestamp
-  private LocalDateTime created;
+  LocalDateTime created;
 
   @UpdateTimestamp
-  private LocalDateTime edited;
+  LocalDateTime edited;
 
-  public Car() {
-  }
-
-  public Car(String brand, String model, double pricePrDay, double bestDiscount) {
-    this.brand = brand;
-    this.model = model;
-    this.pricePrDay = pricePrDay;
-    this.bestDiscount = bestDiscount;
-  }
-
-  @Override
-  public String toString() {
-    return "Car{" +
-        "brand='" + brand + '\'' +
-        ", model='" + model + '\'' +
-        ", pricePrDay=" + pricePrDay +
-        ", bestDiscount=" + bestDiscount +
-        ", created=" + created +
-        ", edited=" + edited +
-        '}';
-  }
 }
