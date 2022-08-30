@@ -26,7 +26,8 @@ public class MemberController {
 
   //Security ADMIN
   @GetMapping(path = "/{username}")
-  MemberResponse getMemberById(@PathVariable String username) throws Exception {return null;}
+  MemberResponse getMemberById(@PathVariable String username) throws Exception {
+    return memberService.findMemberByUsername(username);}
 
   //Security --> USER
   //@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -36,7 +37,6 @@ public class MemberController {
     System.out.println("test");
     return memberService.addMember(body);
   }
-
 
   //Security USER / ADMIN ???
   @PutMapping("/{username}")
