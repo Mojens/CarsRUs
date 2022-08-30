@@ -35,6 +35,8 @@ public class SetupDevUsers implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
         Member m1 = new Member("member1", passwordUsedByAll, "memb1@a.dk", "Kurt", "Wonnegut", "Lyngbyvej 2", "Lynbby", "2800");
+        Member m2 = new Member("member2", passwordUsedByAll, "memb1@b.dk", "Jens", "Ole", "Lyngbyvej 2", "Lynbby", "2800");
+        memberRepository.save(m2);
         memberRepository.save(m1);
         Car car1 = Car.builder()
             .brand("Volvo")
