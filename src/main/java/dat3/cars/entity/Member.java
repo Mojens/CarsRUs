@@ -45,4 +45,6 @@ public class Member extends UserWithRoles {
     this.city = city;
     this.zip = zip;
   }
+
+
 }
