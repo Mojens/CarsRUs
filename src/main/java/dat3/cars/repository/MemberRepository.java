@@ -4,7 +4,5 @@ import dat3.cars.entity.Member;
 import org.springframework.data.repository.CrudRepository;
 
 public interface MemberRepository extends CrudRepository<Member,String> {
-
-  boolean existsByCity(String city);
-
+  
 }
