@@ -31,12 +31,17 @@ public class MemberController {
     return memberService.findMemberByUsername(username);}
 
   //Security --> USER
-  //@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  @PostMapping // same as above when you are using @RestController
+  //@PostMapping // same as above when you are using @RestController
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   MemberResponse addMember(@RequestBody MemberRequest body){
     MemberResponse res = memberService.addMember(body);
     System.out.println("test");
     return memberService.addMember(body);
+  }
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.TEXT_HTML_VALUE)
+  public String addMember2(@RequestBody MemberRequest body) {
+    memberService.addMember(body);
+    return  body.getUsername() + " was created";
   }
 
   //Security USER / ADMIN ???
