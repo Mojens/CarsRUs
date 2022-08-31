@@ -34,8 +34,6 @@ public class MemberController {
   //@PostMapping // same as above when you are using @RestController
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   MemberResponse addMember(@RequestBody MemberRequest body){
-    MemberResponse res = memberService.addMember(body);
-    System.out.println("test");
     return memberService.addMember(body);
   }
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.TEXT_HTML_VALUE)
