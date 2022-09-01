@@ -56,7 +56,6 @@ public class CarService {
     car.setBrand(carRequest.getBrand());
     car.setModel(carRequest.getModel());
     car.setPricePrDay(carRequest.getPricePrDay());
-    car.setBestDiscount(carRequest.getBestDiscount());
     carRepository.save(car);
   }
 
@@ -64,7 +63,7 @@ public class CarService {
     Car foundCar = carRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"car not found"));
     return new CarResponse(foundCar,false);
   }
-  
+
 
 
 
