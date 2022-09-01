@@ -9,6 +9,7 @@ import dat3.cars.entity.Member;
 import dat3.cars.repository.CarRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -48,9 +49,9 @@ public class CarService {
   }
 
   public void editCar(CarRequest carRequest, int id) {
-    Car car = carRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Car with this id already exist"));
+    Car car = carRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Car with this id does not exist"));
     if (carRequest.getId() != id) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot change id");
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot change car");
     }
     car.setBrand(carRequest.getBrand());
     car.setModel(carRequest.getModel());
@@ -58,5 +59,13 @@ public class CarService {
     car.setBestDiscount(carRequest.getBestDiscount());
     carRepository.save(car);
   }
+
+  public CarResponse findCarByID(@PathVariable int id) throws Exception{
+    Car foundCar = carRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"car not found"));
+    return new CarResponse(foundCar,false);
+  }
+  
+
+
 
 }
