@@ -59,7 +59,7 @@ public class CarService {
 
   public CarResponse findCarByID(@PathVariable int id) throws Exception{
     Car foundCar = carRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"car not found"));
-    return new CarResponse(foundCar,false);
+    return new CarResponse(foundCar,true);
   }
 
 

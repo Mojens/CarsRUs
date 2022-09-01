@@ -53,7 +53,7 @@ class CarServiceMockWithH2Test {
   }
 
   @BeforeEach
-  public void setMemberService(){
+  public void setCarService(){
     carService = new CarService(carRepository);
   }
 
