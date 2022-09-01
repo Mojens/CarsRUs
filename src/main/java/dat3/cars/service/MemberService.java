@@ -70,6 +70,6 @@ public class MemberService {
   }
 
   public void deleteByUsername(String username) {
-    memberRepository.existsById(username);
+    memberRepository.deleteById(username);
   }
 }
