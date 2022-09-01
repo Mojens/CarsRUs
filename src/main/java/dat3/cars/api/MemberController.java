@@ -28,7 +28,8 @@ public class MemberController {
   //Security ADMIN
   @GetMapping(path = "/{username}")
   MemberResponse getMemberById(@PathVariable String username) throws Exception {
-    return memberService.findMemberByUsername(username);}
+    return memberService.findMemberByUsername(username);
+  }
 
   //Security --> USER
   //@PostMapping // same as above when you are using @RestController
