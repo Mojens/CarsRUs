@@ -44,7 +44,6 @@ public class SetupDevUsers implements ApplicationRunner {
             .pricePrDay(700)
             .bestDiscount(30.0)
             .build();
-
         carRepository.save(car1);
 
     }
