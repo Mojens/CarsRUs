@@ -2,8 +2,6 @@ package dat3.cars.api;
 
 import dat3.cars.dto.CarRequest;
 import dat3.cars.dto.CarResponse;
-import dat3.cars.dto.MemberRequest;
-import dat3.cars.dto.MemberResponse;
 import dat3.cars.service.CarService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,6 +22,7 @@ public class CarController {
   }
 
   //SECURITY ADMIN & USER
+  @GetMapping
   List<CarResponse> getCars(){
     return carService.findCars();
   }

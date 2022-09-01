@@ -45,7 +45,7 @@ public class CarService {
     }
     Car newCar = CarRequest.getCarEntity(carRequest);
     newCar = carRepository.save(newCar);
-    return new CarResponse(newCar, false);
+    return new CarResponse(newCar, true);
   }
 
   public void editCar(CarRequest carRequest, int id) {
