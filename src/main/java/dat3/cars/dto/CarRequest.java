@@ -26,8 +26,18 @@ public class CarRequest {
   LocalDateTime edited;
 
   public static Car getCarEntity(CarRequest carRequest){
-    return new Car(carRequest.id,carRequest.brand,carRequest.model,carRequest.pricePrDay,carRequest.bestDiscount,carRequest.created,carRequest.edited);
+      Car c  = Car.builder()
+          .id(carRequest.id)
+          .brand(carRequest.brand)
+          .model(carRequest.model)
+          .pricePrDay(carRequest.pricePrDay)
+          .bestDiscount(carRequest.bestDiscount)
+          .created(carRequest.created)
+          .edited(carRequest.edited)
+          .build();
+      return c;
   }
+
 
   public CarRequest(Car c){
     this.id = c.getId();

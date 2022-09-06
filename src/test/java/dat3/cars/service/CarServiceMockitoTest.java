@@ -114,7 +114,7 @@ class CarServiceMockitoTest {
    Mockito.when(carRepository.save(any(Car.class))).thenReturn(newCar);
     CarRequest carRequest = new CarRequest(newCar);
     CarResponse carResponse = carService.addCar(carRequest);
-    assertEquals("Ford",carResponse.getBrand());
+    assertEquals(4,carResponse.getId());
 
   }
 

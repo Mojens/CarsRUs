@@ -2,6 +2,8 @@ package dat3.cars.configuration;
 
 import dat3.cars.entity.Car;
 import dat3.cars.entity.Member;
+import dat3.cars.entity.Rental;
+import dat3.cars.entity.Reservation;
 import dat3.cars.repository.CarRepository;
 import dat3.cars.repository.MemberRepository;
 import dat3.security.entity.Role;
@@ -11,6 +13,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 import dat3.security.repository.UserWithRolesRepository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,10 +37,11 @@ public class SetupDevUsers implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
+        setupUserWithRoleUsers();
         Member m1 = new Member("member1", passwordUsedByAll, "memb1@a.dk", "Kurt", "Wonnegut", "Lyngbyvej 2", "Lynbby", "2800");
         Member m2 = new Member("member2", passwordUsedByAll, "memb1@b.dk", "Jens", "Ole", "Lyngbyvej 2", "Lynbby", "2800");
-        memberRepository.save(m2);
-        memberRepository.save(m1);
+
+
         Car car1 = Car.builder()
             .brand("Volvo")
             .model("V70")
@@ -45,7 +49,40 @@ public class SetupDevUsers implements ApplicationRunner {
             .bestDiscount(30.0)
             .build();
         carRepository.save(car1);
+        Car car2 = Car.builder()
+            .brand("BMW")
+            .model("V70")
+            .pricePrDay(700)
+            .bestDiscount(30.0)
+            .build();
+        carRepository.save(car2);
 
+        Reservation reservation1 = Reservation.builder()
+            .member(m1)
+            .car(car1)
+            .reservationDate(LocalDate.of(2022,10,9).atStartOfDay())
+            .build();
+
+        Reservation reservation2 = Reservation.builder()
+            .member(m2)
+            .car(car2)
+            .reservationDate(LocalDate.of(2023,11,10).atStartOfDay())
+            .build();
+
+        m1.addReservation(reservation1);
+        m2.addReservation(reservation2);
+
+
+        Rental rental1 = Rental.builder()
+            .car(car1)
+            .member(m1)
+            .pricePrDay(1500)
+            .rentalDate(LocalDate.now())
+            .build();
+
+        m1.addRental(rental1);
+        memberRepository.save(m1);
+        memberRepository.save(m2);
     }
 
     /*****************************************************************************************
