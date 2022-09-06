@@ -60,13 +60,13 @@ public class SetupDevUsers implements ApplicationRunner {
         Reservation reservation1 = Reservation.builder()
             .member(m1)
             .car(car1)
-            .reservationDate(LocalDate.of(2022,10,9).atStartOfDay())
+            .rentalDate(LocalDate.from(LocalDate.of(2022,10,9).atStartOfDay()))
             .build();
 
         Reservation reservation2 = Reservation.builder()
             .member(m2)
             .car(car2)
-            .reservationDate(LocalDate.of(2023,11,10).atStartOfDay())
+            .rentalDate(LocalDate.from(LocalDate.of(2023,11,10).atStartOfDay()))
             .build();
 
         m1.addReservation(reservation1);
