@@ -41,6 +41,7 @@ import java.util.List;
       this.lastName = m.getLastName();
       this.city = m.getCity();
       this.zip = m.getZip();
+      this.reservation = m.getReservations().get(0);
       if(includeAll){
         this.created = m.getCreated();
         this.edited = m.getEdited();
