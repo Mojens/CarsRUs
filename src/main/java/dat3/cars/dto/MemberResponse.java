@@ -5,10 +5,16 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import dat3.cars.entity.Member;
 import dat3.cars.entity.Reservation;
+import dat3.cars.repository.ReservationRepository;
+import dat3.cars.service.ReservationService;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -23,6 +29,8 @@ import java.util.List;
     private String street;
     private String city;
     private String zip;
+
+    private Reservation reservation;
 
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
     private LocalDateTime created;

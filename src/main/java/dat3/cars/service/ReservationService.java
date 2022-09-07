@@ -16,6 +16,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -51,8 +53,7 @@ public class ReservationService {
         .car(foundCar)
         .rentalDate(date)
         .build();
-    foundMember.addReservation(reservation);
-    foundCar.addReservation(reservation);
+
     reservationRepository.save(reservation);
   }
 
