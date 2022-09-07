@@ -39,6 +39,7 @@ public class Member extends UserWithRoles {
   private String zip;
 
   private boolean approved;
+
   private int ranking;
 
   @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
@@ -46,7 +47,7 @@ public class Member extends UserWithRoles {
 
   public void addReservation(Reservation reservation){
     reservations.add(reservation);
-    reservation.setMember(this);
+    //reservation.setMember(this);
   }
 
   @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)

@@ -33,9 +33,11 @@ public class ReservationResponse {
 
   public ReservationResponse(Reservation reservation, boolean includeAll){
     this.id = reservation.getId();
-    this.member = reservation.getMember();
-    this.car = reservation.getCar();
     this.reservationDate = reservation.getReservationDate();
     this.rentalDate = reservation.getRentalDate();
+    if (includeAll){
+      this.member = reservation.getMember();
+      this.car = reservation.getCar();
+    }
   }
 }

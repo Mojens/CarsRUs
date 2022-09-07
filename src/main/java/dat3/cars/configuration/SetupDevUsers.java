@@ -56,7 +56,9 @@ public class SetupDevUsers implements ApplicationRunner {
             .bestDiscount(30.0)
             .build();
         carRepository.save(car2);
-
+        memberRepository.save(m1);
+        memberRepository.save(m2);
+/*
         Reservation reservation1 = Reservation.builder()
             .member(m1)
             .car(car1)
@@ -81,8 +83,7 @@ public class SetupDevUsers implements ApplicationRunner {
             .build();
 
         m1.addRental(rental1);
-        memberRepository.save(m1);
-        memberRepository.save(m2);
+       */
     }
 
     /*****************************************************************************************

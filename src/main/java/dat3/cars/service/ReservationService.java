@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.lang.invoke.DelegatingMethodHandle$Holder;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -39,9 +39,8 @@ public class ReservationService {
     return reservationResponses;
   }
   public void reserveCar(String userName, int carId, LocalDate date) {
-    Member foundMember = memberRepository.findById(userName).orElseThrow(()->  new ResponseStatusException(HttpStatus.BAD_REQUEST,"This reservation does not exist"));
-    Car foundCar = carRepository.findById(carId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Car not found"));
-    ;
+    Member foundMember = memberRepository.findById(userName).orElseThrow(()->  new ResponseStatusException(HttpStatus.BAD_REQUEST,"This member does not exist"));
+    Car foundCar = carRepository.findById(carId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Car not found"));;
 
     if (reservationRepository.existsByCar_IdAndAndRentalDate(carId, date)) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Reservation already exist");
@@ -52,6 +51,8 @@ public class ReservationService {
         .car(foundCar)
         .rentalDate(date)
         .build();
+    foundMember.addReservation(reservation);
+    foundCar.addReservation(reservation);
     reservationRepository.save(reservation);
   }
 
