@@ -20,9 +20,9 @@ public class ReservationResponse {
 
   private int id;
 
-  private Member member;
+  private String member_name;
 
-  private Car car;
+  private int carId;
 
   @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
   private LocalDateTime reservationDate;
@@ -36,8 +36,12 @@ public class ReservationResponse {
     this.reservationDate = reservation.getReservationDate();
     this.rentalDate = reservation.getRentalDate();
     if (includeAll){
-      this.member = reservation.getMember();
-      this.car = reservation.getCar();
+      this.member_name = reservation.getMember().getUsername();
+      this.carId = reservation.getCar().getId();
     }
+  }
+
+  public ReservationResponse(Reservation reservation) {
+
   }
 }

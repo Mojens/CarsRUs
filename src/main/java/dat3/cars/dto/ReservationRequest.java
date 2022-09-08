@@ -16,31 +16,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ReservationRequest {
 
-  private int id;
+  private String member_id;
 
-  private Member member;
+  private int car_id;
 
-  private Car car;
-
-  private LocalDateTime reservationDate;
-
-  private LocalDate rentalDate;
-
-  public static Reservation getReservationEntity(ReservationRequest reservationRequest){
-    Reservation r = Reservation.builder()
-        .member(reservationRequest.getMember())
-        .car(reservationRequest.getCar())
-        .reservationDate(reservationRequest.getReservationDate())
-        .rentalDate(reservationRequest.getRentalDate())
-        .build();
-    return r;
-  }
-
-  public ReservationRequest(Reservation reservation){
-    this.id = reservation.getId();
-    this.member = reservation.getMember();
-    this.car = reservation.getCar();
-    this.rentalDate = reservation.getRentalDate();
-  }
+  private LocalDate date;
 
 }

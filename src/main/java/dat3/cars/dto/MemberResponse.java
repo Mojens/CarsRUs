@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
   @Setter
@@ -30,8 +31,7 @@ import java.util.List;
     private String city;
     private String zip;
 
-    private Reservation reservation;
-
+    private List<ReservationResponse> reservationResponses;
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
     private LocalDateTime created;
 
@@ -53,6 +53,7 @@ import java.util.List;
         this.edited = m.getEdited();
         this.ranking = m.getRanking();
       }
+      this.reservationResponses = m.getReservations().stream().map(ReservationResponse::new).collect(Collectors.toList());
     }
   }
 

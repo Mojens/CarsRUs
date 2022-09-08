@@ -37,7 +37,7 @@ public class ReservationService {
 
   public List<ReservationResponse> findReservations(){
     List<Reservation> reservations = reservationRepository.findAll();
-    List<ReservationResponse> reservationResponses = reservations.stream().map(reservation -> new ReservationResponse(reservation,false)).toList();
+    List<ReservationResponse> reservationResponses = reservations.stream().map(reservation -> new ReservationResponse(reservation,true)).toList();
     return reservationResponses;
   }
   public void reserveCar(String userName, int carId, LocalDate date) {
@@ -56,7 +56,7 @@ public class ReservationService {
 
     reservationRepository.save(reservation);
   }
-
+/*
   public void editReservation(ReservationRequest reservationRequest,int id){
     Reservation reservation = reservationRepository.findById(id).orElseThrow(()->  new ResponseStatusException(HttpStatus.BAD_REQUEST,"This reservation does not exist"));
   if (reservationRequest.getId() != id){
@@ -66,6 +66,8 @@ public class ReservationService {
   reservation.setRentalDate(reservationRequest.getRentalDate());
   reservationRepository.save(reservation);
   }
+
+ */
 
   public ReservationResponse findReservationById(@PathVariable int id) throws Exception{
     Reservation foundReservation = reservationRepository.findById(id).orElseThrow(()->  new ResponseStatusException(HttpStatus.BAD_REQUEST,"This reservation does not exist"));
