@@ -17,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -72,18 +73,19 @@ public class ReservationService {
     reservationRepository.save(reservation);
   }
    */
-/*
+
   public void editReservation(ReservationRequest reservationRequest,int id){
     Reservation reservation = reservationRepository.findById(id).orElseThrow(()->  new ResponseStatusException(HttpStatus.BAD_REQUEST,"This reservation does not exist"));
-  if (reservationRequest.getId() != id){
+  if (reservation.getId() != id){
     throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Kunne ikke rediger i reservationen");
   }
-  reservation.setMember(reservationRequest.getMember());
-  reservation.setRentalDate(reservationRequest.getRentalDate());
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    LocalDate reservationDate = LocalDate.parse(reservationRequest.getDate(),formatter);
+  reservation.setRentalDate(reservationDate);
   reservationRepository.save(reservation);
   }
 
- */
+
 
   public ReservationResponse findReservationById(@PathVariable int id) throws Exception{
     Reservation foundReservation = reservationRepository.findById(id).orElseThrow(()->  new ResponseStatusException(HttpStatus.BAD_REQUEST,"This reservation does not exist"));

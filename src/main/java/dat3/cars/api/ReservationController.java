@@ -50,14 +50,12 @@ public class ReservationController {
     return reservationService.findReservationById(reservationId);
   }
 
-  /*
+
   @PutMapping("/{reservationId}")
   ResponseEntity<Boolean> editReservation(@RequestBody ReservationRequest reservationRequest,@PathVariable int reservationId){
     reservationService.editReservation(reservationRequest,reservationId);
     return new ResponseEntity<>(true, HttpStatus.OK);
   }
-
-   */
 
   @DeleteMapping("/{reservationId}")
   void deleteReservationByID(@PathVariable int reservationId){
