@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationService {
@@ -35,25 +36,38 @@ public class ReservationService {
     this.carRepository = carRepository;
   }
 
-  public List<ReservationResponse> findReservations(){
+  public List<ReservationResponse> getReservations(){
     List<Reservation> reservations = reservationRepository.findAll();
-    List<ReservationResponse> reservationResponses = reservations.stream().map(reservation -> new ReservationResponse(reservation,true)).toList();
-    return reservationResponses;
+    List<ReservationResponse> response = reservations.stream().map(ReservationResponse::new).collect(Collectors.toList());
+    return response;
+
   }
-  public void reserveCar(String userName, int carId, LocalDate date) {
-    Member foundMember = memberRepository.findById(userName).orElseThrow(()->  new ResponseStatusException(HttpStatus.BAD_REQUEST,"This member does not exist"));
-    Car foundCar = carRepository.findById(carId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Car not found"));;
-
-    if (reservationRepository.existsByCar_IdAndAndRentalDate(carId, date)) {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Reservation already exist");
+  public void reserveCar(String memberId, int carId, LocalDate dateToReserve){
+    Member member = memberRepository.findById(memberId).orElseThrow(
+        () -> new ResponseStatusException(HttpStatus.NOT_FOUND,"No member with this id found"));
+    //Observe in the following, this strategy requires two round trips to the database
+    Car car = carRepository.findById(carId).orElseThrow(
+        () -> new ResponseStatusException(HttpStatus.NOT_FOUND,"No car with this id found"));
+    if(reservationRepository.existsByCarIdAndRentalDate(car.getId(),dateToReserve)){
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Car is already reserved on this date");
     }
-
     Reservation reservation = Reservation.builder()
-        .member(foundMember)
-        .car(foundCar)
-        .rentalDate(date)
+        .member(member)
+        .car(car)
+        .rentalDate(dateToReserve)
         .build();
-
+    reservationRepository.save(reservation);
+  }
+  public void reserveCarV2(String memberId, int carId, LocalDate dateToReserve){
+    Member member = memberRepository.findById(memberId).orElseThrow(
+        () -> new ResponseStatusException(HttpStatus.NOT_FOUND,"No member with this id found"));
+    //Observe in the following, this strategy requires only ONE round trip to the database
+    Car car = carRepository.findCarByIdIfNotAlreadyReserved(carId, dateToReserve).orElseThrow(()-> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Car is already reserved on this date"));
+    Reservation reservation = Reservation.builder()
+        .member(member)
+        .car(car)
+        .rentalDate(dateToReserve)
+        .build();
     reservationRepository.save(reservation);
   }
 /*
@@ -71,7 +85,7 @@ public class ReservationService {
 
   public ReservationResponse findReservationById(@PathVariable int id) throws Exception{
     Reservation foundReservation = reservationRepository.findById(id).orElseThrow(()->  new ResponseStatusException(HttpStatus.BAD_REQUEST,"This reservation does not exist"));
-    return new ReservationResponse(foundReservation,false);
+    return new ReservationResponse(foundReservation);
   }
 
   public void deleteById(int id){

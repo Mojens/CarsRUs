@@ -4,17 +4,11 @@ package dat3.cars.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import dat3.cars.entity.Member;
-import dat3.cars.entity.Reservation;
-import dat3.cars.repository.ReservationRepository;
-import dat3.cars.service.ReservationService;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,7 +47,15 @@ import java.util.stream.Collectors;
         this.edited = m.getEdited();
         this.ranking = m.getRanking();
       }
-      this.reservationResponses = m.getReservations().stream().map(ReservationResponse::new).collect(Collectors.toList());
+      if(m.getReservations().size()>0){
+        reservationResponses = m.getReservations().stream().map(r->ReservationResponse.builder()
+            .id(r.getId())
+            .carId(r.getCar().getId())
+            .carBrand(r.getCar().getBrand())
+            .rentalDate(r.getRentalDate())
+            .build()
+        ).collect(Collectors.toList());
+      }
     }
   }
 

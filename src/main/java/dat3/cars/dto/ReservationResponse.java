@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import dat3.cars.entity.Car;
 import dat3.cars.entity.Member;
 import dat3.cars.entity.Reservation;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,6 +13,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReservationResponse {
 
@@ -24,6 +24,8 @@ public class ReservationResponse {
 
   private int carId;
 
+  private String carBrand;
+
   @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
   private LocalDateTime reservationDate;
 
@@ -31,17 +33,11 @@ public class ReservationResponse {
   private LocalDate rentalDate;
 
 
-  public ReservationResponse(Reservation reservation, boolean includeAll){
+  public ReservationResponse(Reservation reservation){
     this.id = reservation.getId();
-    this.reservationDate = reservation.getReservationDate();
-    this.rentalDate = reservation.getRentalDate();
-    if (includeAll){
-      this.member_name = reservation.getMember().getUsername();
-      this.carId = reservation.getCar().getId();
-    }
+    this.member_name = reservation.getMember().getUsername();
+    this.carId = reservation.getCar().getId();
+    this.carBrand = reservation.getCar().getBrand();
   }
 
-  public ReservationResponse(Reservation reservation) {
-
-  }
 }
