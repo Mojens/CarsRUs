@@ -33,11 +33,15 @@ public class ReservationResponse {
   private LocalDate rentalDate;
 
 
-  public ReservationResponse(Reservation reservation){
+  public ReservationResponse(Reservation reservation, boolean includeDates){
     this.id = reservation.getId();
     this.member_name = reservation.getMember().getUsername();
     this.carId = reservation.getCar().getId();
     this.carBrand = reservation.getCar().getBrand();
+    if (includeDates){
+      this.reservationDate = reservation.getReservationDate();
+      this.rentalDate = reservation.getRentalDate();
+    }
   }
 
 }

@@ -36,12 +36,12 @@ public class ReservationService {
     this.carRepository = carRepository;
   }
 
-  public List<ReservationResponse> getReservations(){
-    List<Reservation> reservations = reservationRepository.findAll();
-    List<ReservationResponse> response = reservations.stream().map(ReservationResponse::new).collect(Collectors.toList());
-    return response;
+    public List<ReservationResponse> getReservations(){
+      List<Reservation> reservations = reservationRepository.findAll();
+      List<ReservationResponse> response = reservations.stream().map(res-> new ReservationResponse(res,true)).collect(Collectors.toList());
+      return response;
 
-  }
+    }
   public void reserveCar(String memberId, int carId, LocalDate dateToReserve){
     Member member = memberRepository.findById(memberId).orElseThrow(
         () -> new ResponseStatusException(HttpStatus.NOT_FOUND,"No member with this id found"));
@@ -58,6 +58,7 @@ public class ReservationService {
         .build();
     reservationRepository.save(reservation);
   }
+  /*
   public void reserveCarV2(String memberId, int carId, LocalDate dateToReserve){
     Member member = memberRepository.findById(memberId).orElseThrow(
         () -> new ResponseStatusException(HttpStatus.NOT_FOUND,"No member with this id found"));
@@ -70,6 +71,7 @@ public class ReservationService {
         .build();
     reservationRepository.save(reservation);
   }
+   */
 /*
   public void editReservation(ReservationRequest reservationRequest,int id){
     Reservation reservation = reservationRepository.findById(id).orElseThrow(()->  new ResponseStatusException(HttpStatus.BAD_REQUEST,"This reservation does not exist"));
@@ -85,7 +87,7 @@ public class ReservationService {
 
   public ReservationResponse findReservationById(@PathVariable int id) throws Exception{
     Reservation foundReservation = reservationRepository.findById(id).orElseThrow(()->  new ResponseStatusException(HttpStatus.BAD_REQUEST,"This reservation does not exist"));
-    return new ReservationResponse(foundReservation);
+    return new ReservationResponse(foundReservation,true);
   }
 
   public void deleteById(int id){

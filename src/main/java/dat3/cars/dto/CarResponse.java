@@ -10,9 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -25,7 +22,6 @@ public class CarResponse {
   private String model;
   private double pricePrDay;
   private double bestDiscount;
-  private List<ReservationResponse> reservationResponses;
 
   @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
   private LocalDateTime created;
@@ -43,6 +39,5 @@ public class CarResponse {
       this.edited = c.getEdited();
       this.bestDiscount = c.getBestDiscount();
     }
-    this.reservationResponses = c.getReservations().stream().map(ReservationResponse::new).collect(Collectors.toList());
   }
 }

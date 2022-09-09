@@ -29,6 +29,7 @@ public class ReservationController {
     LocalDate reservationDate = LocalDate.parse(date,formatter);
     reservationService.reserveCar(memberId,carId,reservationDate);
   }
+  /*
   @PostMapping()
   public void makeReservation(@RequestBody ReservationRequest request) {
     //date is assumed to come in as a string formatted like: day-month-year
@@ -36,6 +37,8 @@ public class ReservationController {
     LocalDate reservationDate = LocalDate.parse(request.getDate(),formatter);
     reservationService.reserveCar(request.getMember_id(),request.getCar_id(),reservationDate);
   }
+
+   */
 
   @GetMapping
   List<ReservationResponse> getReservations(){
