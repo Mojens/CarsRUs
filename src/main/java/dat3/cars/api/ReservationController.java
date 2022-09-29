@@ -13,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/reservation")
 public class ReservationController {
 
